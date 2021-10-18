@@ -1,0 +1,1017 @@
+{
+  "Cisco-IOS-XE-native:native": {
+    "version": "17.3",
+    "boot-start-marker": [
+      null
+    ],
+    "boot-end-marker": [
+      null
+    ],
+    "banner": {
+      "motd": {
+        "banner": "\nWelcome to the DevNet Sandbox for CSR1000v and IOS XE\n \nThe following programmability features are already enabled:\n  - NETCONF\n  - RESTCONF\n \nThanks for stopping by.\n"
+      }
+    },
+    "memory": {
+      "free": {
+        "low-watermark": {
+          "processor": 71556
+        }
+      }
+    },
+    "call-home": {
+      "Cisco-IOS-XE-call-home:contact-email-addr": "sch-smart-licensing@cisco.com",
+      "Cisco-IOS-XE-call-home:tac-profile": {
+        "profile": {
+          "CiscoTAC-1": {
+            "active": true,
+            "destination": {
+              "transport-method": "http"
+            }
+          }
+        }
+      }
+    },
+    "service": {
+      "timestamps": {
+        "debug": {
+          "datetime": {
+            "msec": {}
+          }
+        },
+        "log": {
+          "datetime": {
+            "msec": [
+              null
+            ]
+          }
+        }
+      },
+      "call-home": [
+        null
+      ]
+    },
+    "platform": {
+      "Cisco-IOS-XE-platform:console": {
+        "output": "virtual"
+      },
+      "Cisco-IOS-XE-platform:qfp": {
+        "utilization": {
+          "monitor": {
+            "load": 80
+          }
+        }
+      },
+      "Cisco-IOS-XE-platform:punt-keepalive": {
+        "disable-kernel-core": true
+      }
+    },
+    "hostname": "csr1000v-1",
+    "username": [
+      {
+        "name": "developer",
+        "privilege": 15,
+        "secret": {
+          "encryption": "9",
+          "secret": "$9$oNguEA9um9vRx.$MsDk0DOy1rzBjKAcySWdNjoKcA7GetG9YNnKOs8S67A"
+        }
+      },
+      {
+        "name": "root",
+        "privilege": 15,
+        "secret": {
+          "encryption": "9",
+          "secret": "$9$IRHgr7MCAEFNLk$ZfOrXoRLFhh6gHIxhLPfOC9KzjIWISv4KqkNAR51kmI"
+        }
+      }
+    ],
+    "vrf": {
+      "definition": [
+        {
+          "name": "TEST1",
+          "address-family": {
+            "ipv4": {}
+          }
+        },
+        {
+          "name": "TEST2",
+          "address-family": {
+            "ipv4": {}
+          }
+        },
+        {
+          "name": "cla_trans",
+          "description": "EVINRUDE",
+          "rd": "172.99.99.98:7777",
+          "address-family": {
+            "ipv4": {}
+          },
+          "route-target": {
+            "export": [
+              {
+                "asn-ip": "64512:7777"
+              }
+            ],
+            "import": [
+              {
+                "asn-ip": "64512:7777"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ens_vpnsupp1",
+          "description": "Front door VRF",
+          "rd": "172.99.99.98:60011",
+          "address-family": {
+            "ipv4": {}
+          }
+        }
+      ]
+    },
+    "ip": {
+      "domain": {
+        "name": "lab.devnetsandbox.local"
+      },
+      "forward-protocol": {
+        "protocol": "nd"
+      },
+      "route": {
+        "ip-route-interface-forwarding-list": [
+          {
+            "prefix": "0.0.0.0",
+            "mask": "0.0.0.0",
+            "fwd-list": [
+              {
+                "fwd": "GigabitEthernet1",
+                "interface-next-hop": [
+                  {
+                    "ip-address": "10.10.20.254"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "scp": {
+        "server": {
+          "enable": [
+            null
+          ]
+        }
+      },
+      "ssh": {
+        "rsa": {
+          "keypair-name": "ssh-key"
+        },
+        "version": 2
+      },
+      "Cisco-IOS-XE-http:http": {
+        "authentication": {
+          "local": [
+            null
+          ]
+        },
+        "server": true,
+        "secure-server": true
+      }
+    },
+    "interface": {
+      "GigabitEthernet": [
+        {
+          "name": "1",
+          "description": "MANAGEMENT INTERFACE - DON'T TOUCH ME",
+          "ip": {
+            "address": {
+              "primary": {
+                "address": "10.10.20.48",
+                "mask": "255.255.255.0"
+              }
+            }
+          },
+          "mop": {
+            "enabled": false,
+            "sysid": false
+          },
+          "Cisco-IOS-XE-ethernet:negotiation": {
+            "auto": true
+          }
+        },
+        {
+          "name": "2",
+          "description": "Network Interface",
+          "shutdown": [
+            null
+          ],
+          "mop": {
+            "enabled": false,
+            "sysid": false
+          },
+          "Cisco-IOS-XE-ethernet:negotiation": {
+            "auto": true
+          }
+        },
+        {
+          "name": "3",
+          "description": "Network Interface",
+          "shutdown": [
+            null
+          ],
+          "mop": {
+            "enabled": false,
+            "sysid": false
+          },
+          "Cisco-IOS-XE-ethernet:negotiation": {
+            "auto": true
+          }
+        }
+      ],
+      "Tunnel": [
+        {
+          "name": 777700,
+          "description": "Primary",
+          "vrf": {
+            "forwarding": "cla_trans"
+          },
+          "ip": {
+            "address": {
+              "primary": {
+                "address": "169.34.255.10",
+                "mask": "255.255.255.252"
+              }
+            },
+            "tcp": {
+              "adjust-mss": 1379
+            },
+            "virtual-reassembly": {},
+            "Cisco-IOS-XE-nat:nat": {
+              "inside": [
+                null
+              ]
+            }
+          },
+          "Cisco-IOS-XE-tunnel:tunnel": {
+            "source": "200.200.200.1",
+            "destination-config": {
+              "ipv4": "1.1.1.1"
+            },
+            "mode": {
+              "ipsec": {
+                "ipv4": {}
+              }
+            },
+            "protection": {
+              "Cisco-IOS-XE-crypto:ipsec": {
+                "profile-option": {
+                  "name": "CLA_IPSEC_PROFILE"
+                }
+              }
+            },
+            "vrf-config": {
+              "vrf-common": {
+                "vrf": "ens_vpnsupp1"
+              }
+            }
+          }
+        },
+        {
+          "name": 777701,
+          "description": "Secondary",
+          "vrf": {
+            "forwarding": "cla_trans"
+          },
+          "ip": {
+            "address": {
+              "primary": {
+                "address": "169.34.255.14",
+                "mask": "255.255.255.252"
+              }
+            },
+            "tcp": {
+              "adjust-mss": 1379
+            },
+            "virtual-reassembly": {},
+            "Cisco-IOS-XE-nat:nat": {
+              "inside": [
+                null
+              ]
+            }
+          },
+          "Cisco-IOS-XE-tunnel:tunnel": {
+            "source": "200.200.200.1",
+            "destination-config": {
+              "ipv4": "2.2.2.2"
+            },
+            "mode": {
+              "ipsec": {
+                "ipv4": {}
+              }
+            },
+            "protection": {
+              "Cisco-IOS-XE-crypto:ipsec": {
+                "profile-option": {
+                  "name": "CLA_IPSEC_PROFILE"
+                }
+              }
+            },
+            "vrf-config": {
+              "vrf-common": {
+                "vrf": "ens_vpnsupp1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "route-map": [
+      {
+        "name": "CLA_IN_PRI",
+        "Cisco-IOS-XE-route-map:route-map-without-order-seq": [
+          {
+            "seq_no": 10,
+            "operation": "permit",
+            "set": {
+              "local-preference": 3602
+            },
+            "match": {
+              "ip": {
+                "address": {
+                  "prefix-list": [
+                    "CLA_IN"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "seq_no": 65535,
+            "operation": "deny"
+          }
+        ]
+      },
+      {
+        "name": "CLA_IN_SEC",
+        "Cisco-IOS-XE-route-map:route-map-without-order-seq": [
+          {
+            "seq_no": 10,
+            "operation": "permit",
+            "set": {
+              "local-preference": 3601
+            },
+            "match": {
+              "ip": {
+                "address": {
+                  "prefix-list": [
+                    "CLA_IN"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "seq_no": 65535,
+            "operation": "deny"
+          }
+        ]
+      },
+      {
+        "name": "CLA_OUT_PRI",
+        "Cisco-IOS-XE-route-map:route-map-without-order-seq": [
+          {
+            "seq_no": 10,
+            "operation": "permit",
+            "match": {
+              "ip": {
+                "address": {
+                  "prefix-list": [
+                    "CLA_OUT"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "seq_no": 65535,
+            "operation": "deny"
+          }
+        ]
+      },
+      {
+        "name": "CLA_OUT_SEC",
+        "Cisco-IOS-XE-route-map:route-map-without-order-seq": [
+          {
+            "seq_no": 10,
+            "operation": "permit",
+            "set": {
+              "as-path": {
+                "prepend": {
+                  "as-container": {
+                    "as-number": "345549 345549 345549"
+                  }
+                }
+              }
+            },
+            "match": {
+              "ip": {
+                "address": {
+                  "prefix-list": [
+                    "CLA_OUT"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "seq_no": 65535,
+            "operation": "deny"
+          }
+        ]
+      }
+    ],
+    "control-plane": {},
+    "logging": {
+      "console-config": {
+        "console": false
+      }
+    },
+    "login": {
+      "on-failure": {
+        "log": {}
+      },
+      "on-success": {
+        "log": {}
+      }
+    },
+    "multilink": {
+      "Cisco-IOS-XE-ppp:bundle-name": "authenticated"
+    },
+    "redundancy": {},
+    "spanning-tree": {
+      "Cisco-IOS-XE-spanning-tree:extend": {
+        "system-id": [
+          null
+        ]
+      }
+    },
+    "subscriber": {
+      "templating": [
+        null
+      ]
+    },
+    "crypto": {
+      "Cisco-IOS-XE-crypto:ikev2": {
+        "keyring": [
+          {
+            "name": "CLA_KEYRING",
+            "peer": [
+              {
+                "name": "1.1.1.1",
+                "address": {
+                  "ipv4": {
+                    "ipv4-address": "1.1.1.1"
+                  }
+                },
+                "identity": {
+                  "address-type": "1.1.1.1"
+                },
+                "pre-shared-key": {
+                  "key": "pass1"
+                }
+              },
+              {
+                "name": "2.2.2.2",
+                "address": {
+                  "ipv4": {
+                    "ipv4-address": "2.2.2.2"
+                  }
+                },
+                "identity": {
+                  "address-type": "2.2.2.2"
+                },
+                "pre-shared-key": {
+                  "key": "pass2"
+                }
+              }
+            ]
+          }
+        ],
+        "policy": [
+          {
+            "name": "IKEv2_GENERAL_POLICY_VRF_ens_vpnsupp1",
+            "match": {
+              "fvrf": {
+                "name": "ens_vpnsupp1"
+              }
+            },
+            "proposal": [
+              {
+                "proposals": "IKEV2_AES256CBC_SHA1_DH2_PROPOSAL"
+              },
+              {
+                "proposals": "IKEV2_AES256CBC_SHA2_DH14_PROPOSAL"
+              },
+              {
+                "proposals": "IKEV2_AES256CBC_SHA2_DH19_PROPOSAL"
+              },
+              {
+                "proposals": "IKEV2_AES256CBC_SHA2_DH2_PROPOSAL"
+              },
+              {
+                "proposals": "IKEV2_AES256CBC_SHA2_DH5_PROPOSAL"
+              }
+            ]
+          }
+        ],
+        "profile": [
+          {
+            "name": "CLA_IKEV2_PROFILE",
+            "authentication": {
+              "local": {
+                "pre-share": {}
+              },
+              "remote": {
+                "pre-share": {}
+              }
+            },
+            "dpd": {
+              "interval": 10,
+              "retry": 3,
+              "query": "periodic"
+            },
+            "identity": {
+              "local": {
+                "address": "200.200.200.2"
+              }
+            },
+            "ivrf": "cla_trans",
+            "keyring": {
+              "local": {
+                "name": "CLA_KEYRING"
+              }
+            },
+            "lifetime": {
+              "seconds": 28800
+            },
+            "match": {
+              "address": {
+                "local": {
+                  "ip": "200.200.200.2"
+                }
+              },
+              "fvrf": {
+                "name": "ens_vpnsupp1"
+              },
+              "identity": {
+                "remote": {
+                  "address": {
+                    "ipv4": [
+                      {
+                        "ipv4-address": "1.1.1.1",
+                        "ipv4-mask": "255.255.255.255"
+                      },
+                      {
+                        "ipv4-address": "2.2.2.2",
+                        "ipv4-mask": "255.255.255.255"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "proposal": [
+          {
+            "name": "IKEV2_AES256CBC_SHA1_DH2_PROPOSAL",
+            "encryption": {
+              "aes-cbc-256": [
+                null
+              ]
+            },
+            "group": {
+              "two": [
+                null
+              ]
+            },
+            "integrity": {
+              "sha1": [
+                null
+              ]
+            }
+          },
+          {
+            "name": "IKEV2_AES256CBC_SHA2_DH14_PROPOSAL",
+            "encryption": {
+              "aes-cbc-256": [
+                null
+              ]
+            },
+            "group": {
+              "fourteen": [
+                null
+              ]
+            },
+            "integrity": {
+              "sha256": [
+                null
+              ]
+            }
+          },
+          {
+            "name": "IKEV2_AES256CBC_SHA2_DH19_PROPOSAL",
+            "encryption": {
+              "aes-cbc-256": [
+                null
+              ]
+            },
+            "group": {
+              "nineteen": [
+                null
+              ]
+            },
+            "integrity": {
+              "sha256": [
+                null
+              ]
+            }
+          },
+          {
+            "name": "IKEV2_AES256CBC_SHA2_DH2_PROPOSAL",
+            "encryption": {
+              "aes-cbc-256": [
+                null
+              ]
+            },
+            "group": {
+              "two": [
+                null
+              ]
+            },
+            "integrity": {
+              "sha256": [
+                null
+              ]
+            }
+          },
+          {
+            "name": "IKEV2_AES256CBC_SHA2_DH5_PROPOSAL",
+            "encryption": {
+              "aes-cbc-256": [
+                null
+              ]
+            },
+            "group": {
+              "five": [
+                null
+              ]
+            },
+            "integrity": {
+              "sha256": [
+                null
+              ]
+            }
+          }
+        ]
+      },
+      "Cisco-IOS-XE-crypto:ipsec": {
+        "transform-set": [
+          {
+            "tag": "ESP-3DES-MD5",
+            "esp": "esp-3des",
+            "esp-hmac": "esp-md5-hmac",
+            "mode": {
+              "tunnel": [
+                null
+              ]
+            }
+          },
+          {
+            "tag": "ESP-3DES-SHA-1",
+            "esp": "esp-3des",
+            "esp-hmac": "esp-sha-hmac",
+            "mode": {
+              "tunnel": [
+                null
+              ]
+            }
+          },
+          {
+            "tag": "ESP-AES-128-SHA-1",
+            "esp": "esp-aes",
+            "esp-hmac": "esp-sha-hmac",
+            "mode": {
+              "tunnel": [
+                null
+              ]
+            }
+          },
+          {
+            "tag": "ESP-AES-192-SHA-256",
+            "esp": "esp-aes",
+            "key-bit": "256",
+            "esp-hmac": "esp-sha256-hmac",
+            "mode": {
+              "tunnel": [
+                null
+              ]
+            }
+          },
+          {
+            "tag": "ESP-AES-256-SHA-1",
+            "esp": "esp-aes",
+            "key-bit": "256",
+            "esp-hmac": "esp-sha-hmac",
+            "mode": {
+              "tunnel": [
+                null
+              ]
+            }
+          },
+          {
+            "tag": "ESP-AES-256-SHA-256",
+            "esp": "esp-aes",
+            "key-bit": "256",
+            "esp-hmac": "esp-sha256-hmac",
+            "mode": {
+              "tunnel": [
+                null
+              ]
+            }
+          },
+          {
+            "tag": "ESP-AES-256-SHA-512",
+            "esp": "esp-aes",
+            "key-bit": "256",
+            "esp-hmac": "esp-sha512-hmac",
+            "mode": {
+              "tunnel": [
+                null
+              ]
+            }
+          }
+        ],
+        "profile": [
+          {
+            "name": "CLA_IPSEC_PROFILE",
+            "set": {
+              "ikev2-profile": "CLA_IKEV2_PROFILE",
+              "pfs": {
+                "group": "group20"
+              },
+              "transform-set": [
+                "ESP-AES-256-SHA-1"
+              ]
+            }
+          }
+        ]
+      },
+      "Cisco-IOS-XE-crypto:pki": {
+        "certificate": {
+          "chain": [
+            {
+              "name": "SLA-TrustPoint",
+              "certificate": [
+                {
+                  "serial": "01",
+                  "certtype": "ca"
+                }
+              ]
+            },
+            {
+              "name": "TP-self-signed-807034967",
+              "certificate": [
+                {
+                  "serial": "01",
+                  "certtype": "self-signed"
+                }
+              ]
+            }
+          ]
+        },
+        "trustpoint": [
+          {
+            "id": "SLA-TrustPoint",
+            "enrollment": {
+              "pkcs12": [
+                null
+              ]
+            },
+            "revocation-check": [
+              "crl"
+            ]
+          },
+          {
+            "id": "TP-self-signed-807034967",
+            "enrollment": {
+              "selfsigned": [
+                null
+              ]
+            },
+            "revocation-check": [
+              "none"
+            ],
+            "subject-name": "cn=IOS-Self-Signed-Certificate-807034967"
+          }
+        ]
+      }
+    },
+    "router": {
+      "Cisco-IOS-XE-bgp:bgp": [
+        {
+          "id": 64512,
+          "bgp": {
+            "log-neighbor-changes": true
+          },
+          "address-family": {
+            "with-vrf": {
+              "ipv4": [
+                {
+                  "af-name": "unicast",
+                  "vrf": [
+                    {
+                      "name": "cla_trans",
+                      "ipv4-unicast": {
+                        "maximum-paths": {
+                          "ebgp": 4,
+                          "ibgp": {
+                            "max": 4
+                          }
+                        },
+                        "neighbor": [
+                          {
+                            "id": "169.34.255.9",
+                            "remote-as": 65515,
+                            "activate": [
+                              null
+                            ],
+                            "ebgp-multihop": {
+                              "max-hop": 5
+                            },
+                            "local-as": {
+                              "as-no": 394453,
+                              "no-prepend": [
+                                null
+                              ],
+                              "replace-as": [
+                                null
+                              ]
+                            },
+                            "route-map": [
+                              {
+                                "inout": "in",
+                                "route-map-name": "CLA_IN_PRI"
+                              },
+                              {
+                                "inout": "out",
+                                "route-map-name": "ENSONO_OUT_PRI"
+                              }
+                            ],
+                            "soft-reconfiguration": "inbound",
+                            "timers": {
+                              "keepalive-interval": 10,
+                              "holdtime": 30
+                            }
+                          },
+                          {
+                            "id": "169.34.255.13",
+                            "remote-as": 65516,
+                            "activate": [
+                              null
+                            ],
+                            "ebgp-multihop": {
+                              "max-hop": 5
+                            },
+                            "local-as": {
+                              "as-no": 394453,
+                              "no-prepend": [
+                                null
+                              ],
+                              "replace-as": [
+                                null
+                              ]
+                            },
+                            "route-map": [
+                              {
+                                "inout": "in",
+                                "route-map-name": "CLA_IN_SEC"
+                              },
+                              {
+                                "inout": "out",
+                                "route-map-name": "ENSONO_OUT_SEC"
+                              }
+                            ],
+                            "soft-reconfiguration": "inbound",
+                            "timers": {
+                              "keepalive-interval": 10,
+                              "holdtime": 30
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "Cisco-IOS-XE-eigrp:router-eigrp": {
+        "eigrp": {
+          "classic-mode": [
+            {
+              "autonomous-system": 100
+            },
+            {
+              "autonomous-system": 155
+            }
+          ],
+          "named-mode": [
+            {
+              "name": "TEST-VRFs",
+              "address-family": {
+                "ipv4": {
+                  "af-ipv4-vrf": [
+                    {
+                      "vrf": "TEST1",
+                      "unicast": "unicast",
+                      "autonomous-system": 135,
+                      "topology": {
+                        "topo-base": [
+                          {
+                            "topology-base": "base"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "vrf": "TEST2",
+                      "unicast": "unicast",
+                      "autonomous-system": 135,
+                      "topology": {
+                        "topo-base": [
+                          {
+                            "topology-base": "base"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "license": {
+      "udi": {
+        "pid": "CSR1000V",
+        "sn": "9ESGOBARV9D"
+      },
+      "boot": {
+        "level": {
+          "ax": [
+            null
+          ]
+        }
+      }
+    },
+    "line": {
+      "console": [
+        {
+          "first": "0",
+          "exec-timeout": {
+            "minutes": 0,
+            "seconds": 0
+          },
+          "stopbits": "1"
+        }
+      ],
+      "vty": [
+        {
+          "first": 0,
+          "last": 4,
+          "login": {
+            "local": [
+              null
+            ]
+          },
+          "transport": {
+            "input": {
+              "input": [
+                "ssh"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Cisco-IOS-XE-diagnostics:diagnostic": {
+      "bootup": {
+        "level": "minimal"
+      }
+    }
+  }
+}
