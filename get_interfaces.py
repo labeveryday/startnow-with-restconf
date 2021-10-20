@@ -16,12 +16,19 @@
  License for the specific language governing permissions and limitations under
  the License.
 """
-import json
-from datetime import datetime
+# Imports the pprint library to print the http response in a pretty format
+from pprint import pprint
+# Imports the requests library for making HTTP requests
 import requests
 
 # Disables unverified HTTPS requests warning
 requests.urllib3.disable_warnings()
+
+# Variables that will be used for RESTCONF authentication
+HOST = "sandbox-iosxe-latest-1.cisco.com"
+USERNAME = "developer"
+PASSWORD = "C1sco12345"
+PORT = '443'
 
 # Headers that tell the server that we are sending/receiving YANG data in json format
 HEADERS = {
@@ -29,51 +36,28 @@ HEADERS = {
     "Content-Type": "application/yang-data+json"
 }
 
-def get_date() -> str:
-    "Return Today's date in Month-Day-Year"
-    return datetime.today().strftime('%m-%d-%Y')
-
-def get_run_config(host: str, username: str, password: str, port: str='443') -> dict:
-    """GET RESTCONF request to gather current running config
+def get_interfaces(host: str=HOST, username: str=USERNAME,
+                   password: str=PASSWORD, port: str=PORT, interface=None) -> dict:
+    """GET RESTCONF function request to gather devices interfaces
 
     Args:
         host (str): hostname or ip of device
         username (str): API username for authentication
         password (str): API user password for authentication
         port (str): port for API uri
-
-    return: dict
-    """
-    url = f"https://{host}:{port}/restconf/data/native"
-    response = requests.get(url=url, headers=HEADERS, auth=(username, password), verify=False)
-    response.raise_for_status()
-    if response.ok:
-        return response
-    return None
-
-def backup_config(config: dict) -> str:
-    """Store running config as json
-
-    Args:
-        config (str): running-config in dictionary format
+        interface (str): Name of interface
 
     return: None
     """
-    hostname = config['Cisco-IOS-XE-native:native']['hostname']
-    today = get_date()
-    with open(f"./backups/{hostname}_{today}.json", "w") as file:
-        json.dump(config, file, indent=2)
-
+    if interface:
+        url = (f"https://{host}:{port}/restconf/data/ietf-interfaces:interfaces/"\
+                "?interface={interface}")
+    else:
+        url = f"https://{host}:{port}/restconf/data/ietf-interfaces:interfaces"
+    response = requests.get(url=url, headers=HEADERS, auth=(username, password), verify=False)
+    response.raise_for_status()
+    return response.json()
 
 if __name__ == "__main__":
-    creds = {
-        "host": "sandbox-iosxe-latest-1.cisco.com",
-        "username": "developer",
-        "password": "C1sco12345"
-    }
-    print("-" * 20)
-    print("Please wait while gathering device running config....")
-    running_config = get_run_config(**creds)
-    backup_config(running_config.json())
-    print("Config has been backup successfully.")
-    print("-" * 20)
+    # Print interfaces in pretty dictionary format
+    pprint(get_interfaces())
