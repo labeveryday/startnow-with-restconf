@@ -51,7 +51,7 @@ def get_interfaces(host: str=HOST, username: str=USERNAME,
     """
     if interface:
         url = (f"https://{host}:{port}/restconf/data/ietf-interfaces:interfaces/"\
-                "?interface={interface}")
+                f"interface={interface}")
     else:
         url = f"https://{host}:{port}/restconf/data/ietf-interfaces:interfaces"
     response = requests.get(url=url, headers=HEADERS, auth=(username, password), verify=False)

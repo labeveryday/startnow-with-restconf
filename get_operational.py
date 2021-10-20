@@ -21,9 +21,6 @@ from pprint import pprint
 # Imports the requests library for making HTTP requests
 import requests
 
-# Imports the Response class object, which contains a server's response to an HTTP request
-from requests.models import Response
-
 # Disables unverified HTTPS requests warning
 requests.urllib3.disable_warnings()
 
@@ -39,15 +36,15 @@ HEADERS = {
     "Content-Type": "application/yang-data+json"
 }
 
-def get_modules(host: str=HOST, username: str=USERNAME,
-                   password: str=PASSWORD, port: str=PORT) -> Response:
+def get_interf_operational(host: str=HOST, username: str=USERNAME,
+                           password: str=PASSWORD, port: str=PORT) -> dict:
     """GET all YANG modules on a devices"""
-    url = f"https://{host}:{port}/restconf/data/ietf-yang-library:modules-state"
+    url = f"https://{host}:{port}/restconf/data/ietf-interfaces:interfaces-state/"
     response = requests.get(url=url, headers=HEADERS, auth=(username, password),
                             verify=False, stream=True)
     response.raise_for_status()
-    return response.json()['ietf-yang-library:modules-state']['module']
+    return response.json()
 
 if __name__ == "__main__":
-    # Print all device YANG modules in dictionary format
-    pprint(get_modules())
+    # Print all interface operational data in dictionary format
+    pprint(get_interf_operational())
